@@ -63,11 +63,21 @@ void fnnombre(){
 	fngotoxy(55, 14);
 	while(i<10){
 		nombre[i] = getch();
-		if (nombre[i]== 13) i = 11;
+		if (nombre[i]== 13) {
+			i = 11;
+		}
 		else {
 			printf("%c", nombre[i]);
 			i++;
 		}
+	}
+	i=3;
+	fngotoxy(52, 16);
+	printf("Empieza en: ");
+	for (i; i>0; i--){
+		fngotoxy(66,16);
+		printf("%d", i);
+		sleep(1);
 	}
 	i=0;
 	fnjugar();
