@@ -43,8 +43,8 @@ void fnintro(){
 	printf("Jugar    ENTER");
 	fngotoxy(53,13);
 	printf("Top 5    SPACE");
-	fngotoxy(41,15);
-	printf("Presione cualquier tecla para salir");
+	fngotoxy(46,15);
+	printf("Presione otra tecla para salir");
 	fngotoxy(82, 10);
 	Tecla = getch();
 	fngotoxy(0, 26);
