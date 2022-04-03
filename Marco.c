@@ -50,6 +50,7 @@ void fngotoxy(int x, int y){
       SetConsoleCursorPosition(hcon,dwPos);
       return;
 }
+/*a ver*/
 
 void fnpantallasize(){
     HANDLE wHnd;
