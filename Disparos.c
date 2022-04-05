@@ -11,6 +11,8 @@
 #define  Jix       53
 #define  Jfx       62
 
+int  t;
+int d;
 int  BG   = 0;
 int  W    = 15;
 int  Line = 9;
@@ -46,7 +48,7 @@ void fninteracciones   ();
 
 void main(){
 	//fnpantallasize();
-	fnintro();
+	fnjugar();
 	return;
 }
 
@@ -127,7 +129,7 @@ void fnarraygeneral(){
 		fngotoxy(4,p);
 		p++;
 		for (x=0; x<(TOPEX-3); x++){
-			A[y][x]= 30;
+			A[y][x]= 0;
 			printf("%c",A[y][x]);
 		}
 	}
@@ -140,32 +142,46 @@ void fninteracciones(){
 		if(Tecla == 0) Tecla = getch();
 		else{
 			switch(Tecla) {
-            	case 75:{
-            		if ((Jix+n)== (Ci + 1)){
+            		case 75:{
+            			if ((Jix+n)== (Ci + 1)){
             			break;
-					}
-					else {
-						c = 0;
-            			fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
-            			n--;
-            			c = 4;
-            			fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
-						break;
-					}
-				}
+									}
+									else {
+										c = 0;
+            				fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+            				n--;
+            				c = 4;
+            				fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+									break;
+									}
+							}
             	case 77:{
-            		if ((Jfx+n)== (TOPEX- 1)){
-            			break;
-					}
-            		else {
-            			c = 0;
-            			fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
-            			c = 4;
-            			n++;
-            			fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
-					}
-					break;
-				}
+            			if ((Jfx+n)== (TOPEX- 1)){
+            				break;
+									}
+            			else {
+            				c = 0;
+            				fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+            				c = 4;
+            				n++;
+            				fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+									}
+									break;
+						}
+							case 32: {
+								for (t=1; (Jiy-t)>2; t++){
+									FnSetColor(0,W);
+									A[Jiy-t][Jix+4+n] = 124;
+									fngotoxy((Jix+4+n),(Jiy-t));
+									printf("%c", A[Jiy-t][Jix+4+n]);
+									Sleep(1);
+									FnSetColor(0,0);
+									fngotoxy((Jix+4+n),(Jiy-t));
+									printf("%c", A[Jiy-t][Jix+4+n]);
+								}
+
+								break;
+							}
 			}
     	}
     }
