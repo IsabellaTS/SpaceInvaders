@@ -3,19 +3,40 @@
 #include <windows.h>
 
 #define  TOPEY     26
-#define  TOPEX     115
+#define  TOPEX     112
 #define  Ci        3
 #define  Fi        1
 
 int  BG   = 0;
 int  W    = 15;
+int  New_Color;
+int  A[TOPEY][TOPEX];
+int  x;
+int  y;
+int  p = 2;
 
+void fnarraygeneral  ();
 void fngotoxy        (int x, int y);
 void fnimprimemarco  (int fi, int ci, int ff, int cf);
 void FnSetColor      (int, int);
 
 void main(){
+	fnarraygeneral();
 	fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
+	return;
+}
+
+void fnarraygeneral(){
+	system("cls");
+	for (y=0; y<(TOPEY-1); y++){
+		fngotoxy(4,p);
+		p++;
+		for (x=0; x<(TOPEX-3); x++){
+			A[y][x]= 0;
+			printf("%c",A[y][x]);
+		}
+		printf("\n");
+	}
 	return;
 }
 
