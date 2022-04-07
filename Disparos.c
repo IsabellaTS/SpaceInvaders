@@ -32,9 +32,13 @@ int  A[TOPEY][TOPEX];    // array general
 int  x;                  //Posición en x
 int  y;                 //Posición  en y
 int  p = 2;
+<<<<<<< HEAD
 int  over;
 int  ci = 17;
 int m;
+=======
+int minutos, segundos, stop;
+>>>>>>> 56f08bb99d39e8741b353cb6c231cc5919902efa
 
 void fnarraygeneral    	();
 void FnSetColor        	(int, int);
@@ -330,7 +334,28 @@ void fnimprimemarco(int fi, int ci, int ff, int cf){
 	return;
 }
 
+void fntimer(int x, int y) {
 
+fngotoxy(198,5);
+printf("TIMER: \n");
+
+stop = 0;
+    for (minutos=0;((minutos<60)&&(stop==0)); minutos++){
+
+      for(segundos=0;((segundos<60)&&(stop==0));segundos++) {
+        fngotoxy(198,5);
+        printf("%d : %d", minutos, segundos);
+        Sleep(1000);
+      }
+
+    }
+    /*
+fngotoxy(45,15);
+printf("TOTAL TIME:\n");
+printf("%d : %d", minutos, segundos);
+*/
+return
+}
 
 void fngotoxy(int x, int y){
       HANDLE hcon;
