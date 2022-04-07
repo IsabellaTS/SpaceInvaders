@@ -37,6 +37,7 @@ int  over;
 int  ci = 17;
 int  m;
 int  nivel;
+int  v;
 
 void fnarraygeneral    	();
 void FnSetColor        	(int, int);
@@ -185,13 +186,16 @@ void fnmovimientoaliens(){
 }
 
 void fnarraygeneral(){
+	v = 0;
 	for (y=0; y<(TOPEY-1); y++){
-		fngotoxy(4,p);
-		p++;
 		for (x=0; x<(TOPEX-3); x++){
-			A[y][x]= 0;
-			printf("%c",A[y][x]);
+			if (A[y][x]> v){
+					v = A[y][x];
+			}
 		}
+	}
+	if (v==0){
+		Tecla = 27;
 	}
 	return;
 }
@@ -233,6 +237,7 @@ void fninteracciones(){
 									if (A[Jiy-t][Jix+4+n]!= 0 ){
 										c=1;
 										fnborraalien();
+										fnarraygeneral();
 									}
 									else{
 										FnSetColor(0,W);
@@ -303,7 +308,6 @@ void fnborraalien(){
 
 void fnjugar(){
 	system("cls");
-	fnarraygeneral();
 	fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
 	fngotoxy(Ci, (Fi-1));
 	for (i; i<10; i++){
