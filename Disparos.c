@@ -272,7 +272,7 @@ fngotoxy(45,15);
 printf("TOTAL TIME:\n");
 printf("%d : %d", minutos, segundos);
 */
-return
+return;
 }
 
 void fngotoxy(int x, int y){
