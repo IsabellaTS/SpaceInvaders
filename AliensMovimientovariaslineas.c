@@ -75,7 +75,7 @@ int fnalien(int C, int a, int b){
 }
 
 void fnaliens(){
-    y = Fi + 1;
+    y = Fi + m;
     do{
       x = ci + t;
       p = t;
@@ -92,12 +92,18 @@ void fnmovimientoaliens(){
   do {
       a = 219;
       b = 31;
-      fnaliens();
+      for (m=1; m<9; m+=3){
+        t=i;
+        fnaliens();
+      }
       Sleep(500);
       t = i;
       a = 0;
       b = 0;
-      fnaliens();
+      for (m=1; m<9; m+=3){
+        t=i;
+        fnaliens();
+      }
       i++;
       t = i;
     }
@@ -106,12 +112,18 @@ void fnmovimientoaliens(){
     do {
         a = 219;
         b = 31;
-        fnaliens();
+        for (m=1; m<9; m+=3){
+          t=i;
+          fnaliens();
+        }
         Sleep(500);
         t = i;
         a = 0;
         b = 0;
-        fnaliens();
+        for (m=1; m<9; m+=3){
+          t=i;
+          fnaliens();
+        }
         i--;
         t = i;
     }

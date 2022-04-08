@@ -11,57 +11,45 @@
 #define  Jix       53
 #define  Jfx       62
 
-int a;
-int b;
-int  t;                  //disparos
-int  BG   = 0;           //Fondo negro
-int  W    = 15;          //Color blanco
-int  Line = 9;           //color del marco
-int  Jx;                 //Coordenada en x del jugador
-int  Jy;                 //coordenada en y del jugador
+int  t;
+int d;
+int  BG   = 0;
+int  W    = 15;
+int  Line = 9;
+int  Jx;
+int  Jy;
 int  score[5];
 char jugadores[5]={'-','-','-','-','-'};
 int  New_Color;
-char Tecla;              //Movimiento
-int  i;                  //Indice del array del nombre
+char Tecla;
+int  i;
+char movimiento;
 char nombre[10];
 long long int Score;
-int  n;                  //Para movimiento del jugador
-int  c = 4;                  //Para decidir colores
-int  A[TOPEY][TOPEX];    // array general
-int  x;                  //Posición en x
-int  y;                 //Posición  en y
+int  n;
+int  c = 4;
+int  A[TOPEY][TOPEX];
+int  x;
+int  y;
 int  p = 2;
-<<<<<<< HEAD
-int  over;
-int  ci = 17;
-int m;
-=======
 int minutos, segundos, stop;
->>>>>>> 56f08bb99d39e8741b353cb6c231cc5919902efa
 
-void fnarraygeneral    	();
-void FnSetColor        	(int, int);
-void fngotoxy          	(int x, int y);
-void fnimprimemarco    	(int fi, int ci, int ff, int cf);
-void fnintro           	();
-void fnTop5            	();
-void fnnombre          	();
-void fnjugar           	();
-void fnjugador         	(int JIx, int JFx, int JIy, int JFy, int N, int C);
-void fninteracciones   	();
-void fnaliens          	();
-int  fnalien           	(int C, int a, int b);
-void fnmovimientoaliens ();
+void fnarraygeneral    ();
+void FnSetColor        (int, int);
+void fngotoxy          (int x, int y);
+void fnimprimemarco    (int fi, int ci, int ff, int cf);
+void fnintro           ();
+void fnTop5            ();
+void fnnombre          ();
+void fnjugar           ();
+void fnjugador         (int JIx, int JFx, int JIy, int JFy, int N, int C);
+void fninteracciones   ();
 
 //void fnmovimiento      ()
 
 void main(){
 	//fnpantallasize();
-	fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
-	fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
-	fninteracciones();
-	//fnmovimientoaliens();
+	fnjugar();
 	return;
 }
 
@@ -136,84 +124,13 @@ void fnjugador(int JIx, int JFx, int JIy, int JFy,int N, int C){
 	return;
 }
 
-int fnalien(int C, int a, int b){
-  FnSetColor(0,c);
-  for (p; p>(t-3); p--){
-    x = ci + p;
-    A[y][x] = a;
-    fngotoxy(x,y);
-    printf("%c", A[y][x]);
-    A[y+1][x] = b;
-    fngotoxy (x, (y+1));
-    printf("%c", A[y+1][x]);
-  }
-  return x;
-}
-
-void fnaliens(){
-    y = Fi + m;
-    do{
-      x = ci + t;
-      p = t;
-      fnalien(c=5, a, b);
-      n++;
-      t += 5;
-    }
-    while (n<18);
-    n = 0;
-  return;
-}
-
-void fnmovimientoaliens(){
-  do {
-		fninteracciones();
-      a = 219;
-      b = 31;
-      for (m=1; m<9; m+=3){
-        t=i;
-        fnaliens();
-      }
-      Sleep(500);
-      t = i;
-      a = 0;
-      b = 0;
-      for (m=1; m<9; m+=3){
-        t=i;
-        fnaliens();
-      }
-      i++;
-      t = i;
-    }
-    while (x < (TOPEX-4) );
-
-    do {
-        a = 219;
-        b = 31;
-        for (m=1; m<9; m+=3){
-          t=i;
-          fnaliens();
-        }
-        Sleep(500);
-        t = i;
-        a = 0;
-        b = 0;
-        for (m=1; m<9; m+=3){
-          t=i;
-          fnaliens();
-        }
-        i--;
-        t = i;
-    }
-    while((ci+t)>(Ci+3));
-}
-
 void fnarraygeneral(){
 	system("cls");
 	for (y=0; y<(TOPEY-1); y++){
 		fngotoxy(4,p);
 		p++;
 		for (x=0; x<(TOPEX-3); x++){
-			A[y][x]= 0;
+			A[y][x]= 176;
 			printf("%c",A[y][x]);
 		}
 	}
@@ -286,8 +203,9 @@ void fnjugar(){
 	printf("%d", Score);
 	fngotoxy(0,27);
 	fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
-	fninteracciones();
 	fngotoxy(0, 27);
+	fninteracciones();
+
 	FnSetColor(0, W);
 	return;
 }
@@ -354,7 +272,7 @@ fngotoxy(45,15);
 printf("TOTAL TIME:\n");
 printf("%d : %d", minutos, segundos);
 */
-return;
+return
 }
 
 void fngotoxy(int x, int y){
