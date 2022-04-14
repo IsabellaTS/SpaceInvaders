@@ -52,7 +52,7 @@ void fnjugador         	(int JIx, int JFx, int JIy, int JFy, int N, int C);
 void fninteracciones   	();
 void fnaliens          	();
 int  fnalien           	(int C, int a, int b, int p, int y);
-void fnmovimientoaliens ();
+void fnfilasaliens ();
 void fnborraalien       ();
 void fnscore            ();
 void fnniveles          ();
@@ -165,7 +165,7 @@ void fnaliens(){
     do{
       x = ci + d;
       p = d;
-      fnalien(c=1, a, b, p, y);
+      fnalien(c=2, a, b, p, y);
       n++;
       d += 5;
     }
@@ -176,7 +176,7 @@ void fnaliens(){
   return;
 }
 
-void fnmovimientoaliens(){
+void fnfilasaliens(){
 	for (m=2; m<9; m+=3){
 		a=219;
 		b=31;
@@ -335,7 +335,7 @@ void fnjugar(){
 	}
 	fngotoxy(0,27);
 	fnscore();
-	fnmovimientoaliens();
+	fnfilasaliens();
 	fnaliens();
 	fnjugador(Jix, Jfx, Jiy, Jfy, n, c=5);
 	fninteracciones();
