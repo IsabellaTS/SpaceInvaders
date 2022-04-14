@@ -11,42 +11,59 @@
 #define  Jix       53
 #define  Jfx       62
 
-int  BG   = 0;
-int  W    = 15;
-int  Line = 9;
-int  Jx;
-int  Jy;
+int  d;
+int  a;
+int  b;
+int  t;                  //disparos
+int  BG   = 0;           //Fondo negro
+int  W    = 15;          //Color blanco
+int  Line = 9;           //color del marco
+int  Jx;                 //Coordenada en x del jugador
+int  Jy;                 //coordenada en y del jugador
 int  score[5];
 char jugadores[5]={'-','-','-','-','-'};
 int  New_Color;
-char Tecla;
-int  i;
-char movimiento;
+char Tecla;              //Movimiento
+int  i;                  //Indice del array del nombre
 char nombre[10];
 long long int Score;
-int  n;
-int  c = 4;
-int  A[TOPEY][TOPEX];
-int  x;
-int  y;
+int  n;                  //Para movimiento del jugador
+int  c = 4;                  //Para decidir colores
+int  A[TOPEY][TOPEX];    // array general
+int  x;                  //Posición en x
+int  y;                 //Posición  en y
 int  p = 2;
+int  over;
+int  ci = 17;
+int  fi = 2;
+int  m;
+int  nivel;
+int  v;
+int  k;
+int  q;
 
-void fnarraygeneral    ();
-void FnSetColor        (int, int);
-void fngotoxy          (int x, int y);
-void fnimprimemarco    (int fi, int ci, int ff, int cf);
-void fnintro           ();
-void fnTop5            ();
-void fnnombre          ();
-void fnjugar           ();
-void fnjugador         (int JIx, int JFx, int JIy, int JFy, int N, int C);
-void fninteracciones   ();
-
-//void fnmovimiento      ()
+void fnarraygeneral    	();
+void FnSetColor        	(int, int);
+void fngotoxy          	(int x, int y);
+void fnimprimemarco    	(int fi, int ci, int ff, int cf);
+void fnintro           	();
+void fnTop5            	();
+void fnnombre          	();
+void fnjugar           	();
+void fnjugador         	(int JIx, int JFx, int JIy, int JFy, int N, int C);
+void fninteracciones   	();
+void fnaliens          	();
+int  fnalien           	(int C, int a, int b, int p, int y);
+//void fnfilasaliens ();
+void fnborraalien       ();
+void fnscore            ();
+void fnniveles          ();
+void fnmovimientoaliens ();
 
 void main(){
-	//fnpantallasize();
-	fnjugar();
+	fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
+	fnjugador(Jix, Jfx, Jiy, Jfy, n, c=5);
+	fnmovimientoaliens();
 	return;
 }
 
@@ -121,16 +138,134 @@ void fnjugador(int JIx, int JFx, int JIy, int JFy,int N, int C){
 	return;
 }
 
-void fnarraygeneral(){
-	system("cls");
-	for (y=0; y<(TOPEY-1); y++){
-		fngotoxy(4,p);
-		p++;
-		for (x=0; x<(TOPEX-3); x++){
-			A[y][x]= 220;
-			printf("%c",A[y][x]);
+int fnalien(int C, int a, int b, int p, int y){
+  FnSetColor(0,c);
+  for (p; p>((d)-3); p--){
+		if((y == Jiy) && (x == (Jix + 4 + n))){
+			system("cls");
+			ci = 17;
+			fi = 2;
+			d = 0;
+			q = 0;
+			d = 0;
+			//falta reiniciar el fnarraygeneral
+			fnintro();
 		}
-		printf("\n");
+    x = ci + p;
+    A[y][x] = b;
+    fngotoxy(x,y);
+    printf("%c", A[y][x]);
+    A[y-1][x] = a;
+    fngotoxy (x, (y-1));
+    printf("%c", A[y-1][x]);
+  }
+  return x;
+}
+
+void fnaliens(){
+    for(m=2; m<9; m+=3){
+    	y = fi + m;
+    do{
+			if((fi+m)>25){
+				a = 0; b = 0; c = 0;
+				fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
+			}
+      x = ci + d;
+      p = d;
+      fnalien(c, a, b, p, y);
+      q++;
+      d += 5;
+			}
+    while (q<19);
+    q = 0;
+    d = 0;
+	}
+  return;
+}
+
+void fnmovimientoaliens(){
+	while (1){
+		k = kbhit();
+		if (k == 1){
+			a = 219; b = 31; c = 2;
+			fnaliens();
+			switch (getch()){
+				case 75:{
+					if ((Jix+n)== (Ci + 1)){
+					break;
+					}
+					else {
+						c = 0;
+						fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+						n--;
+						c = 5;
+						fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+					break;
+					}
+			}
+			case 77:{
+					if ((Jfx+n)== (TOPEX- 1)){
+						break;
+					}
+					else {
+						c = 0;
+						fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+						c = 5;
+						n++;
+						fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+					}
+					break;
+		}
+			case 32: {
+				for (t=1; (Jiy-t)>2; t++){
+					if (A[Jiy-t][Jix+4+n]!= 0 ){
+						c=1;
+						fnborraalien();
+						fnarraygeneral();
+					}
+					else{
+						FnSetColor(0,W);
+						A[Jiy-t][Jix+4+n] = 124;
+						fngotoxy((Jix+4+n),(Jiy-t));
+						printf("%c", A[Jiy-t][Jix+4+n]);
+						Sleep(1);
+						FnSetColor(0,0);
+						fngotoxy((Jix+4+n),(Jiy-t));
+						printf("%c", A[Jiy-t][Jix+4+n]);
+						A[Jiy-t][Jix+4+n] = 0;
+					}
+				}
+				break;
+			}
+			}
+			k = 0;
+			fnmovimientoaliens();
+		}
+		else{
+			if (ci>6){
+				a=0; b = 0; c = 0; ci++;
+				fnaliens();
+				a = 219; b 31; c = 2;
+				fnaliens();
+			}
+			if (ci<TOPEX-91){
+
+			}
+	}
+	return ;
+}
+
+void fnarraygeneral(){
+	v = 0;
+	for (y=0; y<(TOPEY-1); y++){
+		for (x=0; x<(TOPEX-3); x++){
+			if (A[y][x]> v){
+					v = A[y][x];
+			}
+		}
+	}
+	if (v==0){
+		Tecla = 27;
 	}
 	return;
 }
@@ -138,60 +273,119 @@ void fnarraygeneral(){
 void fninteracciones(){
 	while(Tecla != 27){
 		Tecla = getch();
-		if(Tecla == 0) Tecla = getch();
-		else{
 			switch(Tecla) {
-            	case 75:{
-            		if ((Jix+n)== (Ci + 1)){
+            		case 75:{
+            			if ((Jix+n)== (Ci + 1)){
             			break;
-					}
-					else {
-						c = 0;
-            			fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
-            			n--;
-            			c = 4;
-            			fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
-						break;
-					}
-				}
+									}
+									else {
+										c = 0;
+            				fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+            				n--;
+            				c = 5;
+            				fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+									break;
+									}
+							}
             	case 77:{
-            		if ((Jfx+n)== (TOPEX- 1)){
-            			break;
-					}
-            		else {
-            			c = 0;
-            			fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
-            			c = 4;
-            			n++;
-            			fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
-					}
-					break;
-				}
+            			if ((Jfx+n)== (TOPEX- 1)){
+            				break;
+									}
+            			else {
+            				c = 0;
+            				fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+            				c = 5;
+            				n++;
+            				fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+									}
+									break;
+						}
+							case 32: {
+								for (t=1; (Jiy-t)>2; t++){
+									if (A[Jiy-t][Jix+4+n]!= 0 ){
+										c=1;
+										fnborraalien();
+										fnarraygeneral();
+									}
+									else{
+										FnSetColor(0,W);
+										A[Jiy-t][Jix+4+n] = 124;
+										fngotoxy((Jix+4+n),(Jiy-t));
+										printf("%c", A[Jiy-t][Jix+4+n]);
+										Sleep(1);
+										FnSetColor(0,0);
+										fngotoxy((Jix+4+n),(Jiy-t));
+										printf("%c", A[Jiy-t][Jix+4+n]);
+										A[Jiy-t][Jix+4+n] = 0;
+									}
+								}
+								break;
+							}
 			}
     	}
+	return;
+}
+
+void fnscore(){
+	FnSetColor(0, W);
+	fngotoxy((Ci+15), (Fi-1));
+	printf("Score: ");
+	printf("%d", Score);
+	return;
+}
+
+void fnborraalien(){
+	if (A[Jiy-t][(Jix+4+n)-1] == 0){
+		c = 1; d = (Jix+4+n); p = d; ci = 2;
+		fnalien((c = c-1), a=219, b=31, p, (Jiy-t));
+		if (c==0){
+			fnalien((c = c-1), a=0, b=0, p, (Jiy-t));
+		}
+		t=22;
+		Tecla = 0;
+		Score +=100;
+		fnscore();
+	}
+	else if (A[Jiy-t][(Jix+4+n)+1] == 0){
+		c = 1; d = (Jix+2+n); p = d; ci = 2;
+		fnalien((c = c-1), a=219, b=31, p, (Jiy-t));
+		if (c==0){
+			fnalien((c = c-1), a=0, b=0, p, (Jiy-t));
+		}
+		t=22;
+		Tecla = 0;
+		Score += 100;
+		fnscore();
     }
+    else if ((A[Jiy-t][(Jix+4+n)+1] != 0) && (A[Jiy-t][(Jix+4+n)-1] != 0)){
+    	c = 1; d = (Jix+3+n); p = d; ci = 2;
+		fnalien((c = c-1), a=219, b=31, p, (Jiy-t));
+		if (c==0){
+			fnalien((c = c-1), a=0, b=0, p, (Jiy-t));
+		}
+		t=22;
+		Tecla = 0;
+		Score += 100;
+		fnscore();
+	}
 	return;
 }
 
 
 void fnjugar(){
 	system("cls");
-	fnarraygeneral();
 	fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
-	/*
 	fngotoxy(Ci, (Fi-1));
 	for (i; i<10; i++){
 		printf("%c", nombre[i]);
 	}
-	fngotoxy((Ci+15), (Fi-1));
-	printf("Score:");
-	printf("%d", Score);
 	fngotoxy(0,27);
-	fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
-	fngotoxy(0, 27);
+	fnscore();
+	fnaliens();
+	fnjugador(Jix, Jfx, Jiy, Jfy, n, c=5);
 	fninteracciones();
+	fngotoxy(0, 27);
 	FnSetColor(0, W);
-	*/
 	return;
 }
 void fnTop5(){

@@ -35,7 +35,9 @@ int  p = 2;
 int  over;
 int  ci = 17;
 int m;
+int d;
 
+void fnfilasaliens();
 void fnarraygeneral    	();
 void FnSetColor        	(int, int);
 void fngotoxy          	(int x, int y);
@@ -46,88 +48,107 @@ void fnnombre          	();
 void fnjugar           	();
 void fnjugador         	(int JIx, int JFx, int JIy, int JFy, int N, int C);
 void fninteracciones   	();
-void fnaliens          	();
-int  fnalien           	(int C, int a, int b);
+void fnaliens          	(int d);
+int  fnalien           	(int C, int a, int b, int p, int y);
 void fnmovimientoaliens ();
 
 void main (){
-  fnarraygeneral();
+//  fnarraygeneral();
   fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
-  fnmovimientoaliens(c);
-  fngotoxy(0,27);
-  printf("%d", x);
+//  fnmovimientoaliens(c);
+fnarraygeneral();
+//  fngotoxy(0,27);
+//  printf("%d", x);
   return;
 }
 
+void fnarraygeneral(){
+	system("cls");
+	for (y=0; y<(TOPEY-1); y++){
+		fngotoxy(4,p);
+		p++;
+		for (x=0; x<(TOPEX-3); x++){
+			A[y][x]= 1;
+			printf("%c",A[y][x]);
+		}
+		printf("\n");
+	}
+	return;
+}
 
-int fnalien(int C, int a, int b){
+int fnalien(int C, int a, int b,int p, int y){
   FnSetColor(0,c);
-  for (p; p>(t-3); p--){
+  for (p; p>((d)-3); p--){
     x = ci + p;
-    A[y][x] = a;
+    A[y][x] = b;
     fngotoxy(x,y);
     printf("%c", A[y][x]);
-    A[y+1][x] = b;
-    fngotoxy (x, (y+1));
-    printf("%c", A[y+1][x]);
+    A[y-1][x] = a;
+    fngotoxy (x, (y-1));
+    printf("%c", A[y-1][x]);
   }
   return x;
 }
 
-void fnaliens(){
+void fnaliens(int d){
+  for(m=2; m<9; m+=3){
     y = Fi + m;
-    do{
-      x = ci + t;
-      p = t;
-      fnalien(c=5, a, b);
-      n++;
-      t += 5;
-    }
-    while (n<18);
-    n = 0;
-  return;
+  do{
+    x = ci + d;
+    p = d;
+    fnalien(c, a, b, p, y);
+    n++;
+    d += 5;
+  }
+  while (n<18);
+  n = 0;
+//  d=0;
+}
+return;
+}
+
+void fnfilasaliens(){
+	for (m=2; m<9; m+=3){
+		fnaliens(d);
+	//	d=0;
+	}
+	return;
 }
 
 void fnmovimientoaliens(){
   do {
       a = 219;
       b = 31;
-      for (m=1; m<9; m+=3){
-        t=i;
-        fnaliens();
-      }
-      Sleep(500);
-      t = i;
+      c=1;
+      d = i;
+      fnaliens(d);
+      Sleep(400);
+      d = i;
       a = 0;
       b = 0;
-      for (m=1; m<9; m+=3){
-        t=i;
-        fnaliens();
-      }
+      c = 0;
+      fnaliens(d);
       i++;
-      t = i;
+      d = i;
     }
     while (x < (TOPEX-4) );
 
     do {
         a = 219;
         b = 31;
-        for (m=1; m<9; m+=3){
-          t=i;
-          fnaliens();
-        }
+        c = 1;
+        d = i;
+        fnaliens(d);
         Sleep(500);
-        t = i;
+        d = i;
         a = 0;
         b = 0;
-        for (m=1; m<9; m+=3){
-          t=i;
-          fnaliens();
-        }
+        c = 0;
+        fnaliens(d);
         i--;
-        t = i;
+        d = i;
     }
-    while((ci+t)>(Ci+3));
+    while((ci+d)>(Ci+3));
 }
 
 void fnarraygeneral(){
