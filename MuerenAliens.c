@@ -38,6 +38,7 @@ int  ci = 17;
 int  m;
 int  nivel;
 int  v;
+int segundos, minutos;
 
 void fnarraygeneral    	();
 void FnSetColor        	(int, int);
@@ -201,34 +202,50 @@ void fnarraygeneral(){
 }
 
 void fninteracciones(){
+
+	while (!kbhit()){
+		while(minutos< 60){
+			while (segundos < 60 ) {
+						fngotoxy(110,1);
+						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_BLUE|BACKGROUND_RED|BACKGROUND_INTENSITY);
+				printf("%d : %d", minutos, segundos);
+				Sleep(500);
+				segundos++;
+				getch();
+			}
+			 minutos++;
+		}
+	}
+
+while ( kbhit() ) {
 	while(Tecla != 27){
 		Tecla = getch();
 		if(Tecla == 0) Tecla = getch();
 		else{
 			switch(Tecla) {
-            		case 75:{
-            			if ((Jix+n)== (Ci + 1)){
-            			break;
+								case 75:{
+									if ((Jix+n)== (Ci + 1)){
+									break;
 									}
 									else {
 										c = 0;
-            				fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
-            				n--;
-            				c = 5;
-            				fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+										fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+										n--;
+										c = 5;
+										fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
 									break;
 									}
 							}
-            	case 77:{
-            			if ((Jfx+n)== (TOPEX- 1)){
-            				break;
+							case 77:{
+									if ((Jfx+n)== (TOPEX- 1)){
+										break;
 									}
-            			else {
-            				c = 0;
-            				fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
-            				c = 5;
-            				n++;
-            				fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+									else {
+										c = 0;
+										fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
+										c = 5;
+										n++;
+										fnjugador(Jix, Jfx, Jiy, Jfy, n, c);
 									}
 									break;
 						}
@@ -255,10 +272,13 @@ void fninteracciones(){
 								break;
 							}
 			}
-    	}
-    }
+			}
+		}
+}
+
 	return;
 }
+
 
 void fnscore(){
 	FnSetColor(0, W);
