@@ -14,7 +14,7 @@ void display	();
 void nuevo ();
 void sorting ();
 void save ();
-void comparar();
+void comparar(); // funcion comparar tiene el error :(
 void primeraVez();
 void printArray();
 void resto ();
@@ -110,8 +110,9 @@ void resto(){
   fclose(fp);
 
 // organizar array temporal, compara con el nuevo valor, imprimir top y guardarlo
+
       sorting(); // comprobado que funciona bien y no retorna error
-      comparar();
+      comparar(); // funcion comparar tiene el error :(
       printArray();
       save();
       return;
@@ -160,13 +161,14 @@ int i;
           }
         }
         //prueba de que el sorting está bien
-     /*   int j;
+       int j;
         for (j = 0 ; j < 5 ; j++){
-        	printf("%d", pts[j]);
-		}*/ 
+        	printf("%d   ", pts[j]);
+		}
 }
 
 //funcion comparar
+// funcion comparar tiene el error :(
 void comparar(){
 //tempPts
   if(tempPts <= pts[0]){
@@ -176,8 +178,8 @@ void comparar(){
     else{
       pts[0]  = tempPts;
 	int i;
-
-        for( i=0 ; i<5; i++){
+	int stopper = 0;
+        for( i = 0 ; (i<5) && (stopper == 0); i++){
 
             if(pts[i] > pts[i+1]){
               int temp3 = pts[i+1];
@@ -185,11 +187,13 @@ void comparar(){
               pts[i] = temp3;
 
             }
-
+				else {
+					stopper = 1;
+				}
         }
     }
-    
-       int j;
+    // prueba de que la comparación está mal
+     int j;
         for (j = 0 ; j < 5 ; j++){
         	printf("%d   ", pts[j]);
 		}
