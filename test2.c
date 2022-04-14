@@ -235,8 +235,9 @@ void fnaliens(){
 void gameover(){
   system("cls");
   fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
-  fngotoxy(58,10);
-  printf("Funciona");
+  fngotoxy(57,10);
+  printf("GAME OVER\n");
+  printf("\nFinal Score: ",Score);
 
   sleep(15);
   exit(1);
@@ -319,7 +320,7 @@ void fninteracciones(){
 									fnborraalien();
                   fnscore();
 									fngotoxy(0,27);
-									printf("%d", v);
+									//printf("%d", v);
 									}
 									else{
                     if (A[Jiy-t][Jix+4+n] == 20){
