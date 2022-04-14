@@ -235,13 +235,35 @@ void fnaliens(){
 void gameover(){
   system("cls");
   fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
-  fngotoxy(56,10);
+  fngotoxy(57,10);
   printf("GAME OVER\n");
   fngotoxy(54,12);
   printf("Final Score: %d", Score);
+//  fngotoxy(54,14);
+  //printf("Time: ");
 
-  sleep(15);
-  exit(1);
+sleep(2);
+
+fngotoxy(30,20);
+  printf("PLAY AGAIN     PRESS ENTER");
+  fngotoxy(80,20);
+  printf("EXIT     PRESS ESCAPE");
+  fngotoxy(55,22);
+
+  	int miniTecla = getch();
+    switch (miniTecla) {
+      case 27: exit(1);
+      break;
+        case 13: {
+      system("cls");
+          fnjugar();
+        }
+        break;
+          default:
+          break;
+
+    }
+
   return;
 }
 
@@ -288,6 +310,7 @@ void fnjugador(int JIx, int JFx, int JIy, int JFy,int N, int C){
 }
 
 void fninteracciones(){
+
 			switch(getch()) {
             		case 75:{
             			if ((Jix+n)== (Ci + 1)){
