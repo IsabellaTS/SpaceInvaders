@@ -38,6 +38,7 @@ int  fi = 3;
 int  v;
 int  k;
 int  q;
+//int minutos, segundos;
 
 void fnarraygeneral    	();
 void FnSetColor        	(int, int);
@@ -55,6 +56,7 @@ void fnborraalien       ();
 void fnscore            ();
 void fnmovimientoaliens ();
 void fnconteoarray      ();
+void gameover           ();
 
 
 void main(){
@@ -216,8 +218,8 @@ void fnaliens(){
 				e += 3;
       }
      	else if (((y+1)==Jiy)&&((Jix+n)<(ci+e))&&(A[y][x]==232)&&((Jfx+n)>(ci+e))){
-				fngotoxy(0, 27);
-        exit(1);
+
+        gameover();
     	}
       else{
           fnalien(x, y);
@@ -230,12 +232,23 @@ void fnaliens(){
   return;
 }
 
+void gameover(){
+  system("cls");
+  fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
+  fngotoxy(58,10);
+  printf("Funciona");
+
+  sleep(15);
+  exit(1);
+  return;
+}
+
 void fnmovimientoaliens(){
   while (1){
     if (!kbhit()){
       a = 0; c = 0;
       fnaliens();
-      fi++;
+       fi++;
       a = 232; c = 2;
       fnaliens();
       fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
@@ -336,10 +349,21 @@ void fninteracciones(){
 								break;
 							}
 							case 27: {
-								fngotoxy(0,27);
-								exit(1);
-								break;
-							}
+								gameover();
+						       	}
+
+            /*  default: {
+                  while(minutos< 60){
+                    while (segundos < 60 ) {
+                          fngotoxy(110,1);
+                          SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_BLUE|BACKGROUND_RED|BACKGROUND_INTENSITY);
+                      printf("%d : %d", minutos, segundos);
+                      Sleep(1000);
+                      segundos++;
+                    }
+                  }
+              }
+              break;*/ //timer temporal
 			}
 	return;
 }
@@ -353,7 +377,7 @@ void fnconteoarray(){
 		}
 	}
 	if (v==0){
-		exit(1);
+		gameover();
 	}
 	return;
 }
