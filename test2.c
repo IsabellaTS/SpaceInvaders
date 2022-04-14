@@ -235,10 +235,10 @@ void fnaliens(){
 void gameover(){
   system("cls");
   fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
-  fngotoxy(57,10);
+  fngotoxy(56,10);
   printf("GAME OVER\n");
-  fngotoxy(57,12);
-  printf("\nFinal Score: %d", Score);
+  fngotoxy(54,12);
+  printf("Final Score: %d", Score);
 
   sleep(15);
   exit(1);
