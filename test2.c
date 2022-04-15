@@ -19,7 +19,7 @@ int  W    = 15;          //Color blanco
 int  Line = 9;           //color del marco
 int  Jx;                 //Coordenada en x del jugador
 int  Jy;                 //coordenada en y del jugador
-int  score[5];
+int  pts[5];
 char jugadores[5]={'-','-','-','-','-'};
 int  New_Color;
 char Tecla;              //Movimiento
@@ -39,6 +39,11 @@ int  v;
 int  k;
 int  q;
 //int minutos, segundos;
+
+//estructura para el file de los puntos
+typedef struct top{
+    int puntos;
+}top;
 
 void fnarraygeneral    	();
 void FnSetColor        	(int, int);
@@ -94,7 +99,15 @@ void fnintro(){
 }
 
 void fnjuega(){
-
+  system("cls");
+  Score = 0;               //Para decidir colores
+  p = 2;
+  ci = 10;
+  fi = 3;
+  fnjugador(Jix, Jfx, Jiy, Jfy, n, c=3);
+  fnmovimientoaliens();
+  x=0;
+  y=0;
   return;
 }
 
@@ -108,7 +121,7 @@ void fnjugar(){
 	fnscore();
 	return;
 }
-void fnTop5(){
+/*void fnTop5(){
 	system ("cls");
 	fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
 	fngotoxy(50,9);
@@ -125,8 +138,8 @@ void fnTop5(){
 		Tecla = getch();
 	}
 	fnintro();
+}*/
 
-}
 void fnnombre(){
 	system ("cls");
 	fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
@@ -242,6 +255,8 @@ void gameover(){
   fngotoxy(54,7);
   printf("Final Score: %d", Score);
 
+  topScores();
+
   fngotoxy(38,22);
   printf("PLAY AGAIN  -   1 ");
   fngotoxy(68,22);
@@ -249,19 +264,85 @@ void gameover(){
 //Hasta aquí todo bien
 
 		   int opcion;
-		    fngotoxy(62,24);
+		    fngotoxy(61,24);
 		    scanf("%d",&opcion);
 
 		    switch(opcion){
 		    	case 0: exit(1);
 		    		break;
-				case 1: fngotoxy(56,25); printf(" PLAY AGAIN");
+				case 1: fnjuega();
 					break;
 			}
 
     sleep(3);
   exit(1);
 
+  return;
+}
+
+void topScores(){
+
+  top *s ;
+  top sl;
+  FILE *fp;
+  i = 0;
+  n = 1;
+
+        fngotoxy(55,10);
+      printf("TOP 5 SCORES ");
+
+  fp = fopen("fileStruct.txt", "r");
+    if (fp==NULL){
+      primeraVez();}
+
+    else{
+      resto();}
+
+  fclose(fp);
+  return;
+}
+
+void primeraVez(){
+  top *s ;
+  top sl;
+  FILE *fp;
+  i = 0;
+  n = 1;
+  s = (top*) calloc(n,sizeof(top));
+
+  //abrir doc en formato de escritura
+  fp = fopen("fileStruct.txt", "w");
+
+      fflush(stdin);
+      s[i].puntos = Score;
+      fwrite(&s[i], sizeof(top),1,fp);
+ fclose(fp);
+ // cerrar doc en formato de escritura
+
+  //abrir doc en formato de lectura
+  fp = fopen("fileStruct.txt", "r");
+    while(fread(&sl,sizeof(top),1,fp)){
+        pts[4]=sl.puntos;
+        }
+  fclose(fp);
+  //cerrar doc en formato de lectura
+
+  printArray();
+  return;
+}
+
+void resto(){
+
+}
+
+void printArray(){
+  i = 4;
+  int j;
+      for (j = 1; j < 6; j++) {
+        fngotoxy(58,(9+(j+3)));
+        printf("%d.   %d", j, pts[i]);
+        i--;
+      }
   return;
 }
 
