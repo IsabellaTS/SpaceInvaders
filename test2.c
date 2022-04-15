@@ -235,34 +235,32 @@ void fnaliens(){
 void gameover(){
   system("cls");
   fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
-  fngotoxy(57,10);
+  fngotoxy(57,5);
   printf("GAME OVER\n");
-  fngotoxy(54,12);
+  sleep(2);
+
+  fngotoxy(54,7);
   printf("Final Score: %d", Score);
-//  fngotoxy(54,14);
-  //printf("Time: ");
 
-sleep(2);
+  fngotoxy(38,22);
+  printf("PLAY AGAIN  -   1 ");
+  fngotoxy(68,22);
+  printf("EXIT  -   0");
+//Hasta aquí todo bien
 
-fngotoxy(30,20);
-  printf("PLAY AGAIN     PRESS ENTER");
-  fngotoxy(80,20);
-  printf("EXIT     PRESS ESCAPE");
-  fngotoxy(55,22);
+		   int opcion;
+		    fngotoxy(62,24);
+		    scanf("%d",&opcion);
 
-  	int miniTecla = getch();
-    switch (miniTecla) {
-      case 27: exit(1);
-      break;
-        case 13: {
-      system("cls");
-          fnjugar();
-        }
-        break;
-          default:
-          break;
+		    switch(opcion){
+		    	case 0: exit(1);
+		    		break;
+				case 1: fngotoxy(56,25); printf(" PLAY AGAIN");
+					break;
+			}
 
-    }
+    sleep(3);
+  exit(1);
 
   return;
 }
@@ -375,19 +373,7 @@ void fninteracciones(){
 							case 27: {
 								gameover();
 						       	}
-
-            /*  default: {
-                  while(minutos< 60){
-                    while (segundos < 60 ) {
-                          fngotoxy(110,1);
-                          SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_BLUE|BACKGROUND_RED|BACKGROUND_INTENSITY);
-                      printf("%d : %d", minutos, segundos);
-                      Sleep(1000);
-                      segundos++;
-                    }
-                  }
-              }
-              break;*/ //timer temporal
+                    break;
 			}
 	return;
 }
