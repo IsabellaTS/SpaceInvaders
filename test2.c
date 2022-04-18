@@ -265,11 +265,14 @@ void gameover(){
 
 		   int opcion;
 		    fngotoxy(61,24);
-		    scanf("%d",&opcion);
+		    scanf("%d", &opcion);
 
 		    switch(opcion){
-		    	case 0: exit(1);
+		    	case 0: {
+            fngotoxy(0, 27);
+            exit(1);
 		    		break;
+          }
 				case 1: fnjuega();
 					break;
 			}
