@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <windows.h>
 
+
 #define  TOPEY     26
 #define  TOPEX     115
 #define  Ci        3
@@ -11,6 +12,16 @@
 #define  Jix       53
 #define  Jfx       62
 
+#define BBLK "\e[1;30m"
+#define BRED "\e[1;31m"
+#define BGRN "\e[1;32m"
+#define BYEL "\e[1;33m"
+#define BBLU "\e[1;34m"
+#define BMAG "\e[1;35m"
+#define BCYN "\e[1;36m"
+#define BWHT "\e[1;37m"
+
+
 int a;
 int  d;
 int  t;                  //disparos
@@ -19,13 +30,11 @@ int  W    = 15;          //Color blanco
 int  Line = 9;           //color del marco
 int  Jx;                 //Coordenada en x del jugador
 int  Jy;                 //coordenada en y del jugador
-int  pts[5];
-char jugadores[5]={'-','-','-','-','-'};
 int  New_Color;
 char Tecla;              //Movimiento
 int  i;                  //Indice del array del nombre
 char nombre[10];
-long long int Score;
+int Score;
 int  n;                  //Para movimiento del jugador
 int  c = 4;                  //Para decidir colores
 int  A[TOPEY][TOPEX];    // array general
@@ -38,21 +47,11 @@ int  fi = 3;
 int  v;
 int  k;
 int  q;
-//int minutos, segundos;
-
-//estructura para el file de los puntos
-typedef struct top{
-    int puntos;
-}top;
 
 void fnarraygeneral    	();
 void FnSetColor        	(int, int);
 void fngotoxy          	(int x, int y);
 void fnimprimemarco    	(int fi, int ci, int ff, int cf);
-void fnintro           	();
-void fnTop5            	();
-void fnnombre          	();
-void fnjugar           	();
 void fnjugador         	(int JIx, int JFx, int JIy, int JFy, int N, int C);
 void fninteracciones   	();
 void fnaliens          	();
@@ -63,110 +62,10 @@ void fnmovimientoaliens ();
 void fnconteoarray      ();
 void gameover           ();
 
-
 void main(){
   fnjugador(Jix, Jfx, Jiy, Jfy, n, c=3);
   fnmovimientoaliens();
   return;
-}
-
-void fnintro(){
-	system ("cls");
-	fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
-	FnSetColor(0, W);
-	fngotoxy(36,10);
-	printf("Bienvenido a Space Invaders. Elige una opci%cn:\n", 162);
-	fngotoxy(53,12);
-	printf("Jugar    ENTER");
-	fngotoxy(53,13);
-	printf("Top 5    SPACE");
-	fngotoxy(46,15);
-	printf("Presione otra tecla para salir");
-	fngotoxy(82, 10);
-	Tecla = getch();
-	fngotoxy(0, 26);
-	switch(Tecla){
-		case 32: fnTop5; break;
-		case 13:
-		{
-			fnnombre();
-      fnjugar();
-			break;
-		}
-    case 27: exit(1); break;
-	}
-	return;
-}
-
-void fnjuega(){
-  system("cls");
-  Score = 0;               //Para decidir colores
-  p = 2;
-  ci = 10;
-  fi = 3;
-  fnjugador(Jix, Jfx, Jiy, Jfy, n, c=3);
-  fnmovimientoaliens();
-  x=0;
-  y=0;
-  return;
-}
-
-void fnjugar(){
-	system("cls");
-	fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
-	fngotoxy(Ci, (Fi-1));
-	for (i; i<10; i++){
-		printf("%c", nombre[i]);
-	}
-	fnscore();
-	return;
-}
-/*void fnTop5(){
-	system ("cls");
-	fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
-	fngotoxy(50,9);
-	printf("Top 5 Jugadores:");
-	for (i; i<5; i++){
-		fngotoxy(50, (10+i));
-		printf("%5c %5d", jugadores[i], score[i]);
-	}
-	i=0;
-	fngotoxy(39, 18); printf("Presione ESC para regresar al INICIO");
-	fngotoxy(66, 9);
-	Tecla = getch();
-	while (Tecla != 27){
-		Tecla = getch();
-	}
-	fnintro();
-}*/
-
-void fnnombre(){
-	system ("cls");
-	fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
-	fngotoxy(43,12);
-	printf("Ingrese su nombre de jugador:");
-	fngotoxy(55, 14);
-	while(i<10){
-		nombre[i] = getch();
-		if (nombre[i]== 13) {
-			i = 11;
-		}
-		else {
-			printf("%c", nombre[i]);
-			i++;
-		}
-	}
-	i=3;
-	fngotoxy(52, 16);
-	printf("Empieza en: ");
-	for (i; i>0; i--){
-		fngotoxy(66,16);
-		printf("%d", i);
-		printf("%c", 7); // Sonido de Campana
-		sleep(1);
-	}
-	i=0;
-	return;
 }
 
 void fnarraygeneral(){
@@ -248,101 +147,49 @@ void fnaliens(){
 void gameover(){
   system("cls");
   fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
-  fngotoxy(57,5);
-  printf("GAME OVER\n");
-  sleep(2);
 
-  fngotoxy(54,7);
-  printf("Final Score: %d", Score);
 
-  topScores();
+ HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-  fngotoxy(38,22);
-  printf("PLAY AGAIN  -   1 ");
-  fngotoxy(68,22);
-  printf("EXIT  -   0");
-//Hasta aquí todo bien
+  SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_RED);
+  fngotoxy(55,7);
+  printf("G A M E   O V E R");
 
-		   int opcion;
-		    fngotoxy(61,24);
-		    scanf("%d",&opcion);
+SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_BLUE);
 
-		    switch(opcion){
-		    	case 0: exit(1);
-		    		break;
-				case 1: fnjuega();
-					break;
-			}
+  Sleep(500);
+
+  fngotoxy(55,11);
+  printf("FINAL SCORE: ");
+
+  Sleep(500);
+
+  SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_RED);
+  printf("%d", Score);
+
+  SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_BLUE);
+  fngotoxy(44,14);
+
+    SetConsoleTextAttribute(hConsole, FOREGROUND_RED |FOREGROUND_BLUE );
+  printf("%c", 3);
+
+  SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_BLUE);
+  printf(" Gracias por participar en nuestro juego ");
+
+    SetConsoleTextAttribute(hConsole, FOREGROUND_RED |FOREGROUND_BLUE );
+  printf("%c", 3);
+
+  SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_BLUE);
+  fngotoxy(56,17);
+  printf("%c", 184);
+  printf(" COPYRIGHT 2022");
+
+  fngotoxy(48,20);
+  printf("ISABELLA TAPIA Y NAOMI GUERRERO");
 
     sleep(3);
-  exit(1);
+ exit(1);
 
-  return;
-}
-
-void topScores(){
-
-  top *s ;
-  top sl;
-  FILE *fp;
-  i = 0;
-  n = 1;
-
-        fngotoxy(55,10);
-      printf("TOP 5 SCORES ");
-
-  fp = fopen("fileStruct.txt", "r");
-    if (fp==NULL){
-      primeraVez();}
-
-    else{
-      resto();}
-
-  fclose(fp);
-  return;
-}
-
-void primeraVez(){
-  top *s ;
-  top sl;
-  FILE *fp;
-  i = 0;
-  n = 1;
-  s = (top*) calloc(n,sizeof(top));
-
-  //abrir doc en formato de escritura
-  fp = fopen("fileStruct.txt", "w");
-
-      fflush(stdin);
-      s[i].puntos = Score;
-      fwrite(&s[i], sizeof(top),1,fp);
- fclose(fp);
- // cerrar doc en formato de escritura
-
-  //abrir doc en formato de lectura
-  fp = fopen("fileStruct.txt", "r");
-    while(fread(&sl,sizeof(top),1,fp)){
-        pts[4]=sl.puntos;
-        }
-  fclose(fp);
-  //cerrar doc en formato de lectura
-
-  printArray();
-  return;
-}
-
-void resto(){
-
-}
-
-void printArray(){
-  i = 4;
-  int j;
-      for (j = 1; j < 6; j++) {
-        fngotoxy(58,(9+(j+3)));
-        printf("%d.   %d", j, pts[i]);
-        i--;
-      }
   return;
 }
 
