@@ -55,10 +55,115 @@ void fnconteoarray      ();
 void gameover           ();
 
 void main(){
-  fnjugador(Jix, Jfx, Jiy, Jfy, n, c=3);
+  introBonito();
+ fnjugador(Jix, Jfx, Jiy, Jfy, n, c=3);
   fnmovimientoaliens();
   return;
 }
+
+
+void introBonito(){
+  fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
+
+//colores
+//SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_RED);
+//  SetConsoleTextAttribute(hConsole, FOREGROUND_RED |FOREGROUND_BLUE );
+
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+  fngotoxy(45,7);
+
+  printf("BIENVENIDO A ");sleep(1);
+
+      SetConsoleTextAttribute(hConsole, FOREGROUND_RED |FOREGROUND_BLUE );
+      printf("%c ",17);
+
+      SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_RED);
+      printf(" SPACE INVADERS ");
+
+      SetConsoleTextAttribute(hConsole, FOREGROUND_RED |FOREGROUND_BLUE );
+      printf(" %c",16);sleep(2);
+
+  FnSetColor(0, W);
+
+  fngotoxy(50,13);
+  printf(" C O N T R O L E S : ");sleep(1);
+
+      fngotoxy(42,16);
+      SetConsoleTextAttribute(hConsole, FOREGROUND_RED |FOREGROUND_BLUE );
+      printf("%c ",17);
+
+      FnSetColor(0, W);
+      printf("LEFT KEY - MOVERSE A LA IZQUIERDA");sleep(1);
+
+      fngotoxy(42,18);
+      SetConsoleTextAttribute(hConsole, FOREGROUND_RED |FOREGROUND_BLUE );
+      printf("%c  ",16);
+
+      FnSetColor(0, W);
+      printf("RIGHT KEY - MOVERSE A LA DERECHA");sleep(1);
+
+      fngotoxy(47,20);
+      SetConsoleTextAttribute(hConsole, FOREGROUND_RED |FOREGROUND_BLUE );
+      printf("%c  ",22);
+
+      FnSetColor(0, W);
+      printf("SPACE BAR - DISPARAR");
+
+sleep(5);
+
+fngotoxy(55,22);
+printf("STARTS IN:");
+//countdown
+
+  fngotoxy(60,23);
+  printf("3"); sleep(1);
+  fngotoxy(60,23);
+  printf("2"); sleep(1);
+  fngotoxy(60,23);
+  printf("1"); sleep(1);
+
+sleep(2);
+
+//black version
+
+  FnSetColor(0, 0);
+
+  fngotoxy(45,7);
+
+  printf("BIENVENIDO A ");
+      printf("%c ",17);
+      printf(" SPACE INVADERS ");
+      printf(" %c",16);
+  fngotoxy(50,13);
+  printf(" C O N T R O L E S : ");
+
+      fngotoxy(42,16);
+      printf("%c ",17);
+      printf("LEFT KEY - MOVERSE A LA IZQUIERDA");
+
+      fngotoxy(42,18);
+      printf("%c  ",16);
+
+      printf("RIGHT KEY - MOVERSE A LA DERECHA");
+
+      fngotoxy(47,20);
+      printf("%c  ",22);
+
+      printf("SPACE BAR - DISPARAR");
+
+fngotoxy(55,22);
+printf("STARTS IN:");
+//countdown
+
+  fngotoxy(60,23);
+  printf("1");
+
+sleep(2);
+
+  return;
+}
+
 
 void fnarraygeneral(){
 	for (y=0; y<(TOPEY-1); y++){
@@ -136,6 +241,7 @@ void fnaliens(){
   return;
 }
 
+//Game Over screen
 void gameover(){
   system("cls");
   fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
@@ -173,7 +279,7 @@ sleep(1);
   printf("%c", 3);
 
   SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_BLUE);
-  fngotoxy(56,17);
+  fngotoxy(55,17);
     sleep(1);
   printf("%c", 184);
   printf(" COPYRIGHT 2022");
@@ -188,6 +294,7 @@ sleep(1);
 
   return;
 }
+//end of Game Over screen
 
 void fnmovimientoaliens(){
   while (1){
