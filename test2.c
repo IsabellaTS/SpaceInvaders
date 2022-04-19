@@ -140,7 +140,6 @@ void gameover(){
   system("cls");
   fnimprimemarco(Fi, Ci, TOPEY, TOPEX);
 
-
  HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
   SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_BLUE | BACKGROUND_BLUE | BACKGROUND_RED);
@@ -162,6 +161,8 @@ SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_
   SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_BLUE);
   fngotoxy(44,14);
 
+sleep(1);
+
     SetConsoleTextAttribute(hConsole, FOREGROUND_RED |FOREGROUND_BLUE );
   printf("%c", 3);
 
@@ -173,6 +174,7 @@ SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_
 
   SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_BLUE);
   fngotoxy(56,17);
+    sleep(1);
   printf("%c", 184);
   printf(" COPYRIGHT 2022");
 
@@ -180,6 +182,8 @@ SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN |FOREGROUND_
   printf("ISABELLA TAPIA Y NAOMI GUERRERO");
 
     sleep(3);
+
+    fngotoxy(0,28);
  exit(1);
 
   return;
