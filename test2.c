@@ -12,6 +12,8 @@
 #define  Jix       53
 #define  Jfx       62
 
+//Isabella Tapia y Naomi Guerrero
+
 int a;
 int  d;
 int  t;                  //disparos
